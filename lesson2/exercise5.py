@@ -1,14 +1,25 @@
 #!/usr/bin/env python
 
 '''
-Read in the "show_ip_int_brief.txt" file into your program using the .readlines() method.
+Read the 'show_ip_bgp_summ.txt' file into your program. From this BGP output obtain the first and last lines of the output.
 
-Obtain the list entry associated with the FastEthernet4 interface. You can just hard-code the index at this point since we haven't covered for-loops or regular expressions. Use the string .split() method to obtain both the IP address and the corresponding interface associated with the IP.
+From the first line use the string .split() method to obtain the local AS number.
 
-Create a two element tuple from the result (intf_name, ip_address).
+From the last line use the string .split() method to obtain the BGP peer IP address.
 
-Print that tuple to the screen.
-
-Use pycodestyle on this script. Get the warnings/errors to zero. You might need to 'pip install pycodestyle' on your computer (you should be able to type this from the shell prompt). Alternatively, you can type 'python -m pip install pycodestyle'.
+Print both local AS number and the BGP peer IP address to the screen.
 '''
 
+with open("show_ip_bgp_summ.txt") as f:
+    ip_bgp_summ = f.readlines()
+
+first_line = ip_bgp_summ[0]
+last_line = ip_bgp_summ[-1]
+
+print(first_line)
+print(last_line)
+
+_, _, _, _, _, _, _, as_number = first_line.split() # better is as_number = first_line.split()[-1]
+bgp_peer, _, _, _, _, _, _, _, _, _ = last_line.split() # better is bgp_peer = last_line.split()[0]
+
+print(f"AS Number: {as_number}\nBGP Peer IP: {bgp_peer}")
