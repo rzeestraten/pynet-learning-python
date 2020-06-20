@@ -11,3 +11,12 @@ Print that tuple to the screen.
 
 Use pycodestyle on this script. Get the warnings/errors to zero. You might need to 'pip install pycodestyle' on your computer (you should be able to type this from the shell prompt). Alternatively, you can type 'python -m pip install pycodestyle'.
 '''
+
+with open("show_ip_int_brief.txt") as f:
+    ip_int_brief = f.readlines()
+
+fastethernet4 = ip_int_brief[5]
+intf_name, intf_ip, _, _, _, _ = fastethernet4.split()
+
+intf_tuple = intf_name, intf_ip
+print(intf_tuple)
