@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+import os
+
+WINDOWS = True
+
 '''
 Construct a list of 254 IP addresses. The base IP address should be equal to '10.10.100.0' or '10.10.100.'.
 
@@ -31,3 +35,24 @@ base_cmd_windows = 'ping -n 2'
 base_cmd = base_cmd_windows if WINDOWS else base_cmd_linux
 '''
 
+base_cmd_linux = 'ping -c 2'
+base_cmd_windows = 'ping -n 2'
+# Ternary operator
+base_cmd = base_cmd_windows if WINDOWS else base_cmd_linux
+
+base_ip = "10.10.100."
+
+ip_list = []
+
+for i in range(1,255):
+    ip_addr = base_ip + str(i)
+    ip_list.append(ip_addr)
+
+for i, ip_addr in enumerate(ip_list):
+    print(f"{i} ---> {ip_addr}")
+
+new_list = ip_list[2:5]
+
+for ip_addr in new_list:
+    cmd = base_cmd + " " + ip_addr
+    os.system(cmd)
