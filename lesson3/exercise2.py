@@ -10,3 +10,22 @@ Using a conditional statement, also search for '10.220.88.30'. If this IP addres
 Keep track of whether you have found both the Default Gateway and the Arista3 switch. Once you have found both of these devices, 'break' out of the for loop.
 '''
 
+with open("show_arp.txt") as f:
+    contents = f.read()
+
+values_found = 0
+
+for line in contents.splitlines():
+    ip_addr = line.split()[1]
+    mac_addr = line.split()[3]
+
+    if ip_addr == '10.220.88.1':
+        print(f"Default gateway IP/Mac: {ip_addr} / {mac_addr}")
+        values_found += 1
+
+    if ip_addr == '10.220.88.30':
+        print(f"Arista3 IP/Mac is {ip_addr} / {mac_addr}")
+        values_found += 1
+    
+    if values_found == 2:
+        break
